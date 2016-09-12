@@ -1,0 +1,29 @@
+{
+  "name": "github-merge-jira-fixversion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "now-start": "micro -p 3000 index.js",
+    "start": "nodemon node_modules/.bin/micro -p 3000 index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quarterto/github-merge-jira-fixversion.git"
+  },
+  "keywords": [],
+  "author": "Matt Brennan <matt@153.io> (http://blog.153.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quarterto/github-merge-jira-fixversion/issues"
+  },
+  "homepage": "https://github.com/quarterto/github-merge-jira-fixversion#readme",
+  "dependencies": {
+    "@quarterto/heroku-version-infer": "^4.0.1",
+    "boulevard": "^2.3.5",
+    "micro": "^4.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  }
+}
