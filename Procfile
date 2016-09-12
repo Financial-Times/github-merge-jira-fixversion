@@ -1,1 +1,1 @@
-web: node_modules/.bin/micro index.js
+web: node_modules/.bin/micro -p $PORT index.js
