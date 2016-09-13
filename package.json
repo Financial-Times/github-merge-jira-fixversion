@@ -24,6 +24,7 @@
     "@quarterto/await-test": "^1.2.0",
     "@quarterto/heroku-config-to-env": "^1.4.1",
     "@quarterto/heroku-version-infer": "^4.0.1",
+    "@quarterto/jira-create-version": "^1.1.0",
     "@quarterto/jira-set-version": "^1.3.0",
     "boulevard": "^2.3.5",
     "dotenv": "^2.0.0",

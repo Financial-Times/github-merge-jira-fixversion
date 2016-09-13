@@ -5,6 +5,7 @@ import HttpStatus, {MethodNotAllowed, ImATeapot} from 'http-errors';
 import pkg from './package.json';
 import test from '@quarterto/await-test';
 import jiraSetVersion from '@quarterto/jira-set-version';
+import jiraCreateVersion from '@quarterto/jira-create-version';
 import assertHerokuEnv from '@quarterto/assert-heroku-env';
 import fs from 'fs';
 
@@ -27,13 +28,30 @@ export default route({
 		);
 
 		const version = `${data.repository.name}-${await herokuVersionInfer(data.repository.clone_url, 'master')}`;
-		await jiraSetVersion({ticket, version}, {
+		const jiraOptions = {
 			hostname: process.env.JIRA_HOST,
 			user: process.env.JIRA_USER,
 			pass: process.env.JIRA_PASS,
-		});
+			project: ticket.match(/^[A-Z]+/)[0],
+		};
 
-		return `${ticket} fix version set to ${version}`;
+		const messages = [];
+
+		try {
+			await jiraCreateVersion(version, jiraOptions);
+			messages.push(`Version ${version} created on JIRA`);
+		} catch(e) {
+			if(!e.data || e.data.errors.name !== 'A version with this name already exists in this project.') {
+				throw e;
+			}
+
+			messages.push(`Version ${version} already exists on JIRA`);
+		}
+
+		await jiraSetVersion({ticket, version}, jiraOptions);
+
+		messages.push(`${ticket} fix version set to ${version}`);
+		return messages;
 	},
 
 	async '/__about' (req, res) {
