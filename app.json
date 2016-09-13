@@ -1,0 +1,15 @@
+{
+	"name": "github-merge-jira-fixversion",
+	"scripts": {
+	},
+	"env": {
+		"JIRA_HOST": {"required": true},
+		"JIRA_PASS": {"required": true},
+		"JIRA_USER": {"required": true}
+	},
+	"buildpacks": [
+		{
+			"url": "urn:buildpack:heroku/nodejs"
+		}
+	]
+}

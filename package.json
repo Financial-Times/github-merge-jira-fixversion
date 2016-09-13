@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "now-start": "micro -p 3000 index.js",
-    "start": "nodemon node_modules/.bin/micro -p 3000 index.js"
+    "start": "nodemon -x 'node -r dotenv/config' node_modules/.bin/micro -p 3000 index.js",
+    "heroku-env": "heroku-config-to-env -i HEROKU_ -i NODE_ENV"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,14 @@
   },
   "homepage": "https://github.com/quarterto/github-merge-jira-fixversion#readme",
   "dependencies": {
+    "@quarterto/assert-heroku-env": "^1.3.0",
+    "@quarterto/await-test": "^1.2.0",
+    "@quarterto/heroku-config-to-env": "^1.4.1",
     "@quarterto/heroku-version-infer": "^4.0.1",
+    "@quarterto/jira-set-version": "^1.3.0",
     "boulevard": "^2.3.5",
+    "dotenv": "^2.0.0",
+    "http-errors": "^1.5.0",
     "micro": "^4.1.1"
   },
   "devDependencies": {
