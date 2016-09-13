@@ -6,7 +6,7 @@
   "scripts": {
     "now-start": "micro -p 3000 index.js",
     "start": "nodemon -x 'node -r dotenv/config' node_modules/.bin/micro -p 3000 index.js",
-    "heroku-env": "heroku-config-to-env -i HEROKU_ -i NODE_ENV"
+    "heroku-env": "heroku-config-to-env -i HEROKU_ -i NODE_ENV -a apps-team-github-fixversion .env"
   },
   "repository": {
     "type": "git",
