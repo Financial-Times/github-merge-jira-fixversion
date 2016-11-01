@@ -21,12 +21,6 @@ export default route({
 
 		await test(() => data.action === 'closed' && data.pull_request.merged, new HttpStatus(200, 'Pull request not closed'));
 
-		const ticket = getJiraTicket(data.pull_request.head.ref) || getJiraTicket(data.pull_request.title);
-		await test(
-			() => !!ticket,
-			new HttpStatus(200, `No ticket id in branch name "${data.pull_request.head.ref}" or PR title "${data.pull_request.title}"`)
-		);
-
 		const version = `${data.repository.name}-${await herokuVersionInfer(data.repository.clone_url, 'master')}`;
 		const jiraOptions = {
 			hostname: process.env.JIRA_HOST,
@@ -47,6 +41,12 @@ export default route({
 
 			messages.push(`Version ${version} already exists on JIRA`);
 		}
+
+		const ticket = getJiraTicket(data.pull_request.head.ref) || getJiraTicket(data.pull_request.title);
+		await test(
+			() => !!ticket,
+			new HttpStatus(200, `No ticket id in branch name "${data.pull_request.head.ref}" or PR title "${data.pull_request.title}"`)
+		);
 
 		await jiraSetVersion({ticket, version}, jiraOptions);
 
