@@ -26,7 +26,7 @@ export default route({
 			hostname: process.env.JIRA_HOST,
 			user: process.env.JIRA_USER,
 			pass: process.env.JIRA_PASS,
-			project: ticket.match(/^[A-Z]+/)[0],
+			project: process.env.JIRA_PROJECT,
 		};
 
 		const messages = [];
